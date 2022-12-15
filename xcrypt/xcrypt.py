@@ -185,7 +185,7 @@ def main():
     mode.add_argument('-e', '--encrypt', action='store_true',
                         help='perform encryption')
     mode.add_argument('-d', '--decrypt', action='store_true',
-                        help='perform encryption')
+                        help='perform decryption')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='enable verbose output')
     parser.add_argument('-b', '--block-size', type=int, dest='block_size',
