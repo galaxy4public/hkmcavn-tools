@@ -146,6 +146,7 @@ def update_progress(file, size, block):
         percent = min(percent, 100.0)
         print_v(f'\r{file} .. {percent:3.0f}%', end='')
         yield percent
+    yield 100   # this assures that we never run out of data for the progress
 
 def process_file(mode, file, block_size, output):
     #file_size = os.path.getsize(file)
