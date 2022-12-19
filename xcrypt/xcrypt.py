@@ -14,10 +14,15 @@ IV = ''
 META_SIZE=0x4024    # size of the metadata blob
 PADDING=b''
 
+def hardware_int_view(value, bits, signed):
+    base = 1 << bits
+    value %= base
+    return value - base if signed and value.bit_length() == bits else value
+
 def calculate_iv(file, size):
     basename = os.path.basename(file)
     check_code = SHA256.new()
-    check_code.update(f'{os.path.basename(file)}{size}'.encode('utf-8'))
+    check_code.update(f'{os.path.basename(file)}{hardware_int_view(size, 32, True)}'.encode('utf-8'))
     return check_code.hexdigest()[:32]
 
 def perform_test(file):
