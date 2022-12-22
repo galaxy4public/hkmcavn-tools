@@ -87,16 +87,6 @@ def perform_encrypt(block, cipher, check_code):
         encd += cipher.encrypt(block[index:index+BLOC])
         index += BLOC
 
-    if pad:
-        # in out use case this branch can only happen at the end of the file
-        # encryption routine, so we are abusing it to generate the metadata.
-        metadata = bytearray(META_SIZE-1) # META_SIZE
-        metadata[0:2] = b'TE2'
-        metadata[36:36+pad] = encd[-pad:]
-        check_code.update(metadata[36:])
-        metadata[4:36] = check_code.digest()
-        return encd[:len(block) - pad] + metadata
-
     return encd
 
 
@@ -179,6 +169,21 @@ def process_file(mode, file, block_size, output):
                 file_out.write(process_block(mode, block, cipher, param))
                 percent = next(progress)
             print_v('\r', end='')
+
+            if mode == perform_encrypt:
+                metadata = bytearray(META_SIZE-1) # META_SIZE
+                metadata[0:2] = b'TE2'
+                if file_size % 16:
+                    pad = 16 - file_size % 16
+                    file_out.seek(file_size - pad, os.SEEK_SET)
+                    padding = read_in_chunks(file_out, pad, pad)
+                    metadata[36:36+pad] = padding
+                    file_out.seek(file_size - pad, os.SEEK_SET)
+
+                param.update(metadata[36:])
+                metadata[4:36] = param.digest()
+                file_out.write(metadata)
+
 
 
 def main():
