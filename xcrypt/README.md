@@ -94,7 +94,7 @@ Telegram channel.  Specifically, the following people contributed the most
 (listed in no particular order):
 
   - WideOpen (thanks for sharing previous research on the topic)
-  - Brody (thanks for prompt responses and bootstrapping thisresearch)
+  - Brody (thanks for prompt responses and bootstrapping this research)
   - Alexey Murzilin (thanks for willingness to sacrifice your time for running commands on the real hardware)
   - AlexE (thanks for providing data from the real hardware)
   - Rob (thanks for keeping me up to date with news and moral support)
