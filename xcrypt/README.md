@@ -9,6 +9,11 @@ GMs, and Hondas (according to LGe's B2B site).  However, the work and all the
 tests are performed on using firmware related to 2022 KIA Sportage GT-Line as
 it was distributed in Australia.
 
+The encrypted files are using AES128-CBC with a non-standard approach for
+encrypting last incomplete 16 bytes blocks.  The files have also 16KB metadata
+structure attached to them.  The [metadata format structure](https://github.com/galaxy4public/hkmcavn-tools/wiki/Metadata-format) is documented
+in the Wiki.
+
 Usage
 ---
 
