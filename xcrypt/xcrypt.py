@@ -161,7 +161,7 @@ def process_file(mode, file, block_size, output):
         param.update(iv)
 
     with open(file, 'rb') as file_in:
-        with open(output, 'xb') as file_out:
+        with open(output, 'xb+') as file_out:
             cipher = AES.new(bytes.fromhex(KEY), AES.MODE_CBC, iv)
             print_v('\r\033[K', end='')
             progress = update_progress(file, file_size, block_size)
@@ -173,12 +173,12 @@ def process_file(mode, file, block_size, output):
             if mode == perform_encrypt:
                 metadata = bytearray(META_SIZE-1) # META_SIZE
                 metadata[0:2] = b'TE2'
-                if file_size % 16:
-                    pad = 16 - file_size % 16
-                    file_out.seek(file_size - pad, os.SEEK_SET)
-                    padding = read_in_chunks(file_out, pad, pad)
+                pad = 16 - file_size % 16
+                if pad > 0:
+                    file_out.seek(-pad, os.SEEK_END)
+                    padding = file_out.read(pad)
                     metadata[36:36+pad] = padding
-                    file_out.seek(file_size - pad, os.SEEK_SET)
+                    file_out.seek(-pad, os.SEEK_END)
 
                 param.update(metadata[36:])
                 metadata[4:36] = param.digest()
