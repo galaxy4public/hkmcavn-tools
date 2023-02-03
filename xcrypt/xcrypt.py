@@ -219,7 +219,7 @@ def main():
             print_v('output set to a directory')
             if not os.path.isdir(args.output):
                 print_v(f'creating output directory "{args.output}"')
-                os.makedirs(args.output, mode=777)
+                os.makedirs(args.output)
         else:
             if len(args.file) > 1 or os.path.isdir(args.file[0]):
                 print(f'ERROR: cannot process multiple files into one, check that "-o" argument ends with /')
