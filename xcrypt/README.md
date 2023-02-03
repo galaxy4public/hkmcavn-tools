@@ -56,8 +56,16 @@ The script currently supports three modes of operation:
        Performing a decryption
        /home/galaxy/KIA/2022_Sportage_AU/.lge.upgrade.xml => .lge.upgrade.xml
 
+3. decrypting a whole folder
 
-3. encrypting one or more files
+   The following demonstrates how to decrypt a whole folder:
+
+       $ ~/hkmcavn-tools/xcrypt/xcrypt.py -d -v ./ -o ./decrypted/
+       Performing a decryption
+       ./.lge.upgrade.xml => ./decrypted/.lge.upgrade.xml
+       ...
+
+4. encrypting one or more files
 
    Below is an example of a session where a plain-text version of the XML
    file is encrypted back to its version from the firmware distribution:
@@ -65,6 +73,15 @@ The script currently supports three modes of operation:
        $ ~/hkmcavn-tools/xcrypt/xcrypt.py -e -v .lge.upgrade.xml -o encrypted/.lge.upgrade.xml
        Performing an encryption
        .lge.upgrade.xml => encrypted/.lge.upgrade.xml
+
+5. encrypting a whole folder
+
+   The following demonstrates how to encrypt a whole folder:
+
+       $ ~/hkmcavn-tools/xcrypt/xcrypt.py -e -v ./ -o ./encrypted/
+       Performing an encryption
+       ./.lge.upgrade.xml => ./encrypted/.lge.upgrade.xml
+       ...
 
    Note: the encryption logic implemented by LGe relies on the file name, so
    if you rename an encrypted file it would be possible to decrypt it using
@@ -75,7 +92,7 @@ You can always get a help output with `-h` if you are not sure which options to
 use, but since the script is in its early development there is no point of
 documenting the options here at the moment.
 
-When multiple files are specified on the command line for either encryption or
+When multiple files or a folder are specified on the command line for either encryption or
 decryption, the only accepted value for the output is a directory.  As it is
 currently implemented, the script will create full paths to files it was
 working on under the specified directory, e.g. if you ask to decrypt files

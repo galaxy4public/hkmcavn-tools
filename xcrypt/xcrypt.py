@@ -215,14 +215,14 @@ def main():
         sys.exit(1)
 
     if args.output:
-        if args.output[-1] == os.sep:
+        if args.output[-1] == "/":
             print_v('output set to a directory')
             if not os.path.isdir(args.output):
                 print_v(f'creating output directory "{args.output}"')
                 os.makedirs(args.output)
         else:
-            if len(args.file) > 1:
-                print(f'ERROR: cannot process multiple files into one, check that "-o" argument ends with "{os.sep}"')
+            if len(args.file) > 1 or os.path.isdir(args.file[0]):
+                print(f'ERROR: cannot process multiple files into one, check that "-o" argument ends with /')
                 sys.exit(1)
     else:
         print_v('no output was specified, will prepend ".out" suffix to processed files')
@@ -240,7 +240,8 @@ def main():
         mode = perform_decrypt
 
     result = 0
-    for file in args.file:
+    files_to_process = [os.path.join(path, name) for path, subdirs, files in os.walk(args.file[0]) for name in files] if os.path.isdir(args.file[0]) else args.file 
+    for file in files_to_process:
         if not os.access(file, os.R_OK):
             print_v(f'{file} does not exist or is not readable, skipping')
             continue
@@ -254,8 +255,8 @@ def main():
         else:
             output_file = args.output
             if args.output:
-                if args.output[-1] == os.sep:
-                    output_file = os.path.join(args.output, os.path.abspath(file)[1:])
+                if args.output[-1] == "/":
+                    output_file = os.path.join(args.output, os.path.relpath(file))
                     print(f'{output_file}')
                     if not os.path.isdir(os.path.dirname(output_file)):
                         print_v(f'creating output directory "{args.output}"')
