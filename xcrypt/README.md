@@ -4,7 +4,7 @@ xcrypt.py
 This is a small (and not very Pythonic) Python script that implements both
 decryption and encryption of the firmware files as distributed by several
 automotive companies who are using the head unit solution designed by LG
-Electronics (LGe).  These head units can be found in modern KIAs, Hyindais,
+Electronics (LGe).  These head units can be found in modern KIAs, Hyundais,
 GMs, and Hondas (according to LGe's B2B site).  However, the work and all the
 tests are performed on using firmware related to 2022 KIA Sportage GT-Line as
 it was distributed in Australia.
