@@ -45,7 +45,7 @@ The script currently supports three modes of operation:
    exit code (please see the script source to understand what different exit codes
    mean).  For a very simple use case, one can just run `xcrypt.py -t file_to_check`
    and if exit code is zero, then the file is encrypted and most likely can be
-   decrypted using the scriptr. If the exit code is not zero, then the file is
+   decrypted using the script. If the exit code is not zero, then the file is
    either not encrypted or damaged.
 
 2. decrypting one or more files
@@ -102,11 +102,16 @@ was pointing to a file in user's home directory) and `out/somewhere/fed.bca`.
 Most likely, this behaviour will be tuned in future versions of the script, but
 right now it works as described above.
 
+Known limitations / TODO
+---
+  - Only produces the 'TE2' version of he encrypted files (no 'TER' yet)
+  - Does not yet support the addition of the RSA signature into the metadata
+
 Thanks
 ---
 
 The creation of this script would not be possible without generous help from
-the community at [Gen5 Wide-Open](https://g4933.gitlab.io/wideopen/) at their
+the community at [Gen5 Wide-Open](https://g4933.gitlab.io/wideopen/) and their
 Telegram channel.  Specifically, the following people contributed the most
 (listed in no particular order):
 
@@ -115,5 +120,4 @@ Telegram channel.  Specifically, the following people contributed the most
   - Alexey Murzilin (thanks for willingness to sacrifice your time for running commands on the real hardware)
   - AlexE (thanks for providing data from the real hardware)
   - Rob (thanks for keeping me up to date with news and moral support)
-
-
+  
