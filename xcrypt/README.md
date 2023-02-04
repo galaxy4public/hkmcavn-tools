@@ -56,8 +56,6 @@ The script currently supports three modes of operation:
        Performing a decryption
        /home/galaxy/KIA/2022_Sportage_AU/.lge.upgrade.xml => .lge.upgrade.xml
 
-3. decrypting a whole folder
-
    The following demonstrates how to decrypt a whole folder:
 
        $ ~/hkmcavn-tools/xcrypt/xcrypt.py -d -v ./ -o ./decrypted/
@@ -65,7 +63,7 @@ The script currently supports three modes of operation:
        ./.lge.upgrade.xml => ./decrypted/.lge.upgrade.xml
        ...
 
-4. encrypting one or more files
+3. encrypting one or more files
 
    Below is an example of a session where a plain-text version of the XML
    file is encrypted back to its version from the firmware distribution:
@@ -73,8 +71,6 @@ The script currently supports three modes of operation:
        $ ~/hkmcavn-tools/xcrypt/xcrypt.py -e -v .lge.upgrade.xml -o encrypted/.lge.upgrade.xml
        Performing an encryption
        .lge.upgrade.xml => encrypted/.lge.upgrade.xml
-
-5. encrypting a whole folder
 
    The following demonstrates how to encrypt a whole folder:
 
@@ -104,7 +100,7 @@ right now it works as described above.
 
 Known limitations / TODO
 ---
-  - Only produces the 'TE2' version of he encrypted files (no 'TER' yet)
+  - Only produces the 'TE2' version of the encrypted files (no 'TER' yet)
   - Does not yet support the addition of the RSA signature into the metadata
 
 Thanks
