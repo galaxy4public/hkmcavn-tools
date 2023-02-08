@@ -5,8 +5,14 @@ import sys
 import time
 
 from base64 import b64encode
-from Crypto.Cipher import AES
-from Crypto.Hash import SHA256
+try:
+    # Try PyCryptodome as standalone version
+    from Cryptodome.Cipher import AES
+    from Cryptodome.Hash import SHA256
+except ModuleNotFoundError:
+    # try PyCryptodome as a replacement for PyCrypto
+    from Crypto.Cipher import AES
+    from Crypto.Hash import SHA256
 
 print_v = print
 KEY = '60a93d70f73302a63e5ed0d0ea38be22'
