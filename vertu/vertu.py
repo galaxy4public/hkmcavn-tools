@@ -55,20 +55,14 @@ class VersionFile:
         self.parse(definition)
 
     def parse(self, definition):
-        (self.path, self.name, self.type,
+        (self.path, self.name, self.version,
          self.crc32, self.size, self.unknown) = definition.split('|')
-
-        # A quick check for the expected values (if one experiences a file with
-        # different values, they should open an issue on GitHub.
-        if self.type != '14' or self.unknown != '1':
-            raise(SyntaxError(f'Unknown type ({self.type}) or '
-                              f'last field ({self.unknown})'))
 
         # normalise path
         self.path = self.path.replace('\\', '/')
 
         # convert to integers
-        self.type = int(self.type)
+        self.version = int(self.version)
         self.unknown = int(self.unknown)
 
         # zlib.crc32() is always unsigned integer in Python
@@ -114,7 +108,7 @@ class VersionFile:
         return '{}|{}|{}|{}|{}|{}'.format(
                 self.path.replace('/','\\'),
                 self.name,
-                self.type,
+                self.version,
                 hardware_int_view(self.crc32, 32, True),
                 hardware_int_view(self.size, 64, False),
                 self.unknown)
