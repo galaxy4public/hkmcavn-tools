@@ -21,7 +21,7 @@ The script currently supports three modes of operation:
 
 1. testing whether a file (or a group of files) are encrypted or not encrypted
 
-   The following session excerpt is from running the script aagainst all files in
+   The following session excerpt is from running the script against all files in
    the directory with downloaded firmware for 2022 KIA Sportage:
 
        $ ~/hkmcavn-tools/xcrypt/xcrypt.py -t -v $(find . -type f)
@@ -80,7 +80,7 @@ The script currently supports three modes of operation:
        ...
 
    Note: the encryption logic implemented by LGe relies on the file name, so
-   if you rename an encrypted file it would be possible to decrypt it using
+   if you rename an encrypted file it would not be possible to decrypt it using
    the standard logic (perhaps a new mode needs to be introduced to specify
    the original name of the file for these cases?).
 
