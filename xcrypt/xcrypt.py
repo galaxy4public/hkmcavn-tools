@@ -27,8 +27,9 @@ def hardware_int_view(value, bits, signed):
 
 def calculate_iv(file, size):
     basename = os.path.basename(file)
+    print_v(f"Calculate IV for {basename} size {size}")
     check_code = SHA256.new()
-    check_code.update(f'{os.path.basename(file)}{hardware_int_view(size, 32, True)}'.encode('utf-8'))
+    check_code.update(f'{basename}{hardware_int_view(size, 32, True)}'.encode('utf-8'))
     return check_code.hexdigest()[:32]
 
 def perform_test(file):
@@ -162,7 +163,10 @@ def process_file(mode, file, block_size, output):
         param = ''
     elif mode == perform_encrypt:
         file_size = os.path.getsize(file)
-        iv = bytes.fromhex(calculate_iv(file, file_size))
+        name_for_iv = output if args.output else file
+        if name_for_iv == file:
+            print(f"Warning: because no specific output name was specified, the file will be encrypted using the input file name ({os.path.basename(name_for_iv)}), since it is assumed you will have to rename it from the final .out.")
+        iv = bytes.fromhex(calculate_iv(name_for_iv, file_size))
         param = SHA256.new()
         param.update(iv)
 
@@ -194,6 +198,7 @@ def process_file(mode, file, block_size, output):
 
 def main():
     global print_v
+    global args
 
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group()
